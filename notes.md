@@ -1,0 +1,31 @@
+# Notes
+
+### Data to use as test/example
+
+* Gene expression time course in human cells
+([here](https://www.ebi.ac.uk/arrayexpress/experiments/E-GEOD-73213/?keywords=time%20course&organism=&exptype%5B0%5D=%22rna%20assay%22&exptype%5B1%5D=%22sequencing%20assay%22&array=&sortby=processed&sortorder=descending&page=1&pagesize=250))
+
+### Features we might want to add
+
+* Options for different distance/dissimilarity measures
+* Options for different types of clustering (hierarchical or K-partitioning)
+* Produce a "silhouette plot" (http://www.sciencedirect.com/science/article/pii/0377042787901257?via%3Dihub) to diagnose if the chosen number of clusters makes sense
+* More interactivity between graphs, like we discussed choosing a gene that is highlighted in the graph, clicking one graph to trigger an action that changes another graph next to it, etc...
+* GO enrichment
+* motif enrichment
+* For Arabidopsis, potential TF binding enrichment using the DAP-seq
+dataset?
+* There is also the following database, which can be useful, for plants
+TFs: http://plantregmap.cbi.pku.edu.cn/tf_enrichment.php
+
+### Already existing apps
+
+What can we add to these already existing apps?
+
+https://kcvi.shinyapps.io/START/
+
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5291987/
+
+http://biit.cs.ut.ee/clustvis/
+
+https://asap.epfl.ch/

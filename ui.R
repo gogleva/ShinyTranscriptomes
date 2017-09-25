@@ -3,31 +3,38 @@
 # run the application by clicking 'Run App' above.
 #
 # Find out more about building applications with Shiny here:
-# 
+#
 #    http://shiny.rstudio.com/
 #
 
 library(shiny)
 
 # Define UI for application that draws a histogram
-navbarPage("SLCU heatmap",
-                   tabPanel("Input data",
-  # Sidebar with a slider input for number of bins 
-  sidebarLayout(
-    sidebarPanel(
-       fileInput("expression","Choose CSV file",
-                 accept=c('text/csv', 'text/comma-separated-values,text/plain', '.csv')),
-       tags$hr(),
-       checkboxInput('header', 'Header', TRUE),
-       radioButtons('sep', 'Separator',
-                    c(Comma=',',
-                      Semicolon=';',
-                      Tab='\t'))
-    ),
-    
-    # Show a plot of the generated distribution
-    mainPanel(
-      dataTableOutput('contents')
-    )
+shinyUI(tagList(
+  navbarPage(
+    title="SLCU heatmap",
+    tabPanel("Input data",
+             # Sidebar with a slider input for number of bins
+             sidebarLayout(
+               sidebarPanel(
+                 fileInput(
+                   "expression",
+                   "Choose CSV file",
+                   accept = c('text/csv', 'text/comma-separated-values,text/plain', '.csv')
+                 ),
+                 tags$hr(),
+                 checkboxInput('header', 'Header', TRUE),
+                 radioButtons('sep', 'Separator',
+                              c(
+                                Comma = ',',
+                                Semicolon = ';',
+                                Tab = '\t'
+                              ))
+               ),
+               
+               # Show a plot of the generated distribution
+               mainPanel(dataTableOutput('contents'))
+             )),
+    tabPanel("heatmap")
   )
 ))

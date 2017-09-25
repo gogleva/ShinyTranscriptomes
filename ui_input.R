@@ -20,7 +20,8 @@ tabPanel("Input data",
                                            Comma = ',',
                                            Semicolon = ';',
                                            Tab = '\t'
-                                         )))
+                                         ))),
+           conditionalPanel("output.dataUploaded",actionButton("submitData","Submit"))
            ),
            
            # Show a plot of the generated distribution

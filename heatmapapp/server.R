@@ -12,13 +12,13 @@ library(shiny)
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
    
-  output$contents <- renderTable({
+  output$contents <- renderDataTable({
     inFile <- input$expression
     
     if(is.null(inFile))
       return(NULL)
-    read.csv(inFile$datapath)
+    read.csv(inFile$datapath, header=input$header, sep=input$sep)
     
-  })
+  }, options=list(aLengthMenu=c(10,30,50),iDisplayLength=10, scrollX=TRUE))
   
 })

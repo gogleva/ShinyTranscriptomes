@@ -18,16 +18,13 @@ shinyUI(fluidPage(
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
     sidebarPanel(
-       sliderInput("bins",
-                   "Number of bins:",
-                   min = 100,
-                   max = 500,
-                   value = 30)
+       fileInput("expression","Choose CSV file",
+                 accept=c('text/csv', 'text/comma-separated-values,text/plain', '.csv'))
     ),
     
     # Show a plot of the generated distribution
     mainPanel(
-       plotOutput("distPlot")
+      tableOutput('contents')
     )
   )
 ))

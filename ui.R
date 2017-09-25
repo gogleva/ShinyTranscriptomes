@@ -13,6 +13,7 @@ library(shiny)
 shinyUI(tagList(
   navbarPage(
     title="SLCU heatmap",
+    source("ui_home.R",local=TRUE)$value,
    source("ui_input.R",local=TRUE)$value,
    source("ui_heatmap.R",local=TRUE)$value
   )

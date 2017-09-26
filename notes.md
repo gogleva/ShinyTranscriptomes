@@ -35,6 +35,7 @@ https://asap.epfl.ch/
 
 Interactive heatmaps: https://blog.rstudio.com/2015/06/24/d3heatmap/
 
+Coupled evens in plots: https://plot.ly/r/shiny-coupled-events/
 
 ### Notes after discussion: focus on clustering and visualising
 

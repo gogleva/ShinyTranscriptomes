@@ -7,8 +7,13 @@ tabPanel("GO enrichment",
              c('Example data' = "example_data",
                'Upload data' = "upload_data")),
              
+             selectInput("GOterm", "Select GOterm",
+                         choices = c('biological process',
+                                     'molecular function',
+                                     'cellular localisation')),
+             
              selectInput("method", "Select method", 
-                         choices=c('method1', 'method2', 'method3'))),
+                         choices = c('method1', 'method2', 'method3'))),
 
              mainPanel(h3(textOutput("Result")))
          ))

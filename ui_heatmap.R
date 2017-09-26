@@ -1,21 +1,36 @@
-
-
-tabPanel("heatmap",
-         sidebarLayout(sidebarPanel(
-           actionButton("drawHeatmap", "Draw heatmap"),
-           tags$hr(),
-           radioButtons('dataTransform','Data transformation type',
-                        c('None'='none',
-                          'Log2(X+1)'='log2',
-                          'Z-score: (X-mean)/SD'='zscore')),
-           tags$hr(),
-           radioButtons('corMethod','Correlation based distance type',
-                        c('Pearson'='pearson',
-                          'Spearman'='spearman',
-                          'Kendall'='kendall')),
-           tags$hr(),
-           numericInput('treeGroups','Select number of clusters',
-                        1, min=1, max=12)),
-           mainPanel(plotlyOutput("heatmap")))
-         )
+#
+# user-interface for the heatmap tabPanel
+#
+tabPanel(
+  "heatmap",
+  
+  # Sidebar with options on the side and preview of data on the main panel
+  sidebarLayout(
+    
+    sidebarPanel(
+      # Action button to draw heatmap
+      actionButton("draw_heatmap", "Draw heatmap"),
+      tags$hr(),
+      
+      # Options for data transformation
+      radioButtons("data_transform", "Data transformation",
+                   c("None"="none",
+                     "Log2(X+1)"="log2",
+                     "Z-score: (X-mean)/SD"="zscore")),
+      tags$hr(),
+      
+      # Options for distance matrix
+      radioButtons("corMethod","Distance metric",
+                   c("1 - Pearson's correlation"="pearson",
+                     "1 - Spearman's correlation"="spearman",
+                     "1 - Kendall's correlation"="kendall")),
+      tags$hr(),
+      
+      # Option for number of clusters to cut the tree by
+      numericInput("tree_k","Number of groups to cut the tree",
+                   1, min=1, max=12)),
+    
+    # Plot the heatmap in the main panel
+    mainPanel(plotlyOutput("heatmap")))
+)
 

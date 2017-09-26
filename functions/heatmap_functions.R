@@ -1,35 +1,77 @@
+# Function to choose rows with most variable data (per row)
+chooseTop <- function(x, n_top){
+  
+  # Take rows with the highest variance
+  if(n_top < nrow(x)){
+    # Order by decreasing order of variance
+    i_top <- order(apply(x, 1, var), decreasing = TRUE)
+    x <- x[i_top[1:n_top], ]
+  }
+  
+  return(x)
+}
 
 
-
-transformData <- function(x,vars=-1,transMethod){
-  rownames(x) <- x[,1]
-  x <- x[1:100,]
-  if (transMethod=="none") {
-    return(x[,vars])
-  } else if (transMethod=="log2") {
-    x_vars <- log2(x[,vars]+1)
-    return(x_vars)
-  } else if (transMethod=="zscore") {
-    x_vars <- x[,vars]
-    x_remain <- x[,-vars]
-    x_zscore <- (x_vars-rowMeans(x_vars))/apply(x_vars,1,sd)
-    return(x_zscore)
+# Function to transform and tidy the user data
+transformData <- function(x, vars = -1, trans_method, n_top = 100){
+  
+  # Check that the first column is not selected for analysis
+  if(1 %in% vars) stop("The first column cannot be used for analysis. It should contain gene IDs")
+  
+  # Define rownames from the first column (gene IDs)
+  rownames(x) <- x[, 1]
+  
+  # Keep only the expression columns chosen by the user (all by default)
+  x <- x[, vars]
+  
+  # Transform the data as requested
+  if (trans_method == "none") {
+    x <- x
+    
+  } else if (trans_method == "log2") {
+    x <- log2(x + 1)
+    
+  } else if (trans_method == "zscore") {
+    x <- (x - rowMeans(x)) / apply(x, 1, sd)
+    
   } else {
     stop("Transformation method not valid")
+    
   }
+  
+  # Choose the rows based on variance
+  x <- chooseTop(x, n_top)
+  
+  return(x)
 }
 
 
+# Function to cluster data
+clustData <- function(x, 
+                      dist_method = c("pearson", "spearman", "kendall")){
+  
+  # Ensure dist_method is valid
+  if(!(dist_method[1] %in% c("pearson", "spearman", "kendall")))
+    stop("Distance metric is not valid")
+  
+  # Calculate correlation
+  x_cor <- cor(t(x), method = dist_method)
+  
+  # Convert to dist object and subtract 1 (anti-correlation)
+  x_dist <- as.dist((1 - x_cor))
+  
+  # NA values are replaced with 0
+  x_dist[is.na(x_dist)] <- 0
+  
+  # Cluster data using hclust with default options
+  # and convert to dendrogram
+  x_den <- hclust(x_dist, method = "complete") %>% 
+    as.dendrogram()
+  
+  # # Cut the tree into defined number of groups
+  # x_cut <- cutree(x_clust, k)
+  # k_colour = brewer.pal(12, 'Set3')[x_cut]
+  # 
 
-clustData <- function(x,vars=-1,distMethod,k) {
-xCor <- cor(t(x[,vars]), method = distMethod)
-xCor[is.na(xCor)]<-0
-xCorDist<-as.dist((1-xCor))
-xCorDist[is.na(xCorDist)]<-0
-xCorDistClust <- hclust(xCorDist, method="complete")
-xCorDistClustDen <- as.dendrogram(xCorDistClust)
-xCorDistClustClusters=brewer.pal(12,'Set3')[cutree(xCorDistClust, k = k)]
-return(list(den=xCorDistClustDen, k=xCorDistClustClusters))
+  return(x_den)
 }
-
-

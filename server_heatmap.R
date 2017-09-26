@@ -1,43 +1,29 @@
+#
+# Server code for heatmap panel
+#
 
-
-
-
-observeEvent(input$drawHeatmap,{
-  exprData <- inputDataReactive()
-  if(!is.null(exprData)){
-    exprData <- exprData$data
-  }
+# This is triggered when the user clicks the draw_heatmap button
+observeEvent(input$draw_heatmap, {
   
-  exprData <- transformData(exprData, transMethod=input$dataTransform)
-  print(input$dataTransform)
-  exprDen <- clustData(exprData,distMethod=input$corMethod, k=input$treeGroups)
-  k=input$treeGroups
+  # Read the data using the input_reactive function
+  expr_data <- input_reactive()
+  
+  # Transform the data
+  expr_data <- transformData(expr_data, trans_method = input$data_transform)
+  
+  # Cluster the data
+  expr_den <- clustData(expr_data,
+                        dist_method = input$corMethod)
+  
+  # Number of groups for colouring the tree
+  k <- input$tree_k
+  
+  # Plot
   output$heatmap <-  renderPlotly({
-      # heatmaply(as.matrix(exprData[,-1]),
-                # Rowv = exprDen, 
-                # Colv=NA, dendrogram='row', trace = 'none' ,labRow=NA
-                # )
-    heatmaply(exprData, Colv=FALSE, Rowv= exprDen$den, 
-              k_row=k ) %>%
-      layout(dragmode="select")
+    heatmaply(expr_data,
+              Colv = FALSE,
+              Rowv = expr_den,
+              k_row = k) %>%
+      layout(dragmode = "select")
   })
-  print("heatmap done")
 })
-
-
-# heatmap.2(as.matrix(BoleanHighNoise[,2:13]), Colv=TRUE, dendrogram='row', Rowv=TRUE, 
-#           col= purpleblackyellow,breaks=seq(0,1,length.out=101), trace = 'none' ,
-#           labRow=NA, labCol=names(BoleanHighNoise[2,13]), main="Genes Highly Variable",ColSideColors=ColDay,
-#           na.rm=F, na.color="black")
-
-# 
-# observeEvent(inputDataReactive(),{
-#   output$dummyHistogram <-  renderPlot({
-#     tmp <- inputDataReactive()
-#     if(!is.null(tmp)){
-#       tmp <- tmp$data
-#       hist(tmp[,2])
-#     }
-#   })
-# })
-

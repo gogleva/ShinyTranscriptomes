@@ -28,7 +28,12 @@ tabPanel(
       
       # Option for number of clusters to cut the tree by
       numericInput("tree_k","Number of groups to cut the tree",
-                   1, min=1, max=12)),
+                   value = 1, min=1, max=12),
+      tags$hr(),
+      
+      # Option for number of genes to plot
+      numericInput("n_top", "Number of top variable genes to cluster",
+                   value = 100, min = 10, max = Inf)),
     
     # Plot the heatmap in the main panel
     mainPanel(plotlyOutput("heatmap")))

@@ -9,7 +9,9 @@ observeEvent(input$draw_heatmap, {
   expr_data <- input_reactive()
   
   # Transform the data
-  expr_data <- transformData(expr_data, trans_method = input$data_transform)
+  expr_data <- transformData(expr_data, 
+                             trans_method = input$data_transform,
+                             n_top = input$n_top)
   
   # Cluster the data
   expr_den <- clustData(expr_data,

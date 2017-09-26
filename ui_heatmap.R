@@ -13,6 +13,6 @@ tabPanel("heatmap",
                         c('Pearson'='pearson',
                           'Spearman'='spearman',
                           'Kendall'='kendall'))),
-           mainPanel(plotOutput("heatmap")))
+           mainPanel(plotlyOutput("heatmap")))
          )
 

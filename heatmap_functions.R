@@ -2,6 +2,8 @@
 
 
 transformData <- function(x,vars=-1,transMethod){
+  rownames(x) <- x[,1]
+  x <- x[1:100,]
   if (transMethod=="none") {
     return(x)
   } else if (transMethod=="log2") {

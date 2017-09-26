@@ -11,11 +11,14 @@ observeEvent(input$drawHeatmap,{
   exprData <- transformData(exprData, transMethod=input$dataTransform)
   print(input$dataTransform)
   exprDen <- clustData(exprData,distMethod=input$corMethod)
-  output$heatmap <-  renderPlot({
-      heatmap.2(as.matrix(exprData[,-1]),
-                Rowv = exprDen, 
-                Colv=NA, dendrogram='row', trace = 'none' ,labRow=NA )
+  output$heatmap <-  renderPlotly({
+      # heatmaply(as.matrix(exprData[,-1]),
+                # Rowv = exprDen, 
+                # Colv=NA, dendrogram='row', trace = 'none' ,labRow=NA
+                # )
+    heatmaply(exprData[,-1], Colv=FALSE, Rowv= exprDen)
   })
+  print("heatmap done")
 })
 
 

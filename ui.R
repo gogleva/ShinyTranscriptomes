@@ -9,6 +9,7 @@
 
 library(shiny)
 library(gplots)
+library(heatmaply)
 
 # Define UI for application that draws a histogram
 shinyUI(tagList(

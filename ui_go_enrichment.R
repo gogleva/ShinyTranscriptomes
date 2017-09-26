@@ -19,9 +19,16 @@ tabPanel("GO enrichment",
                          choices = c('biological process',
                                      'molecular function',
                                      'cellular localisation')),
+             
+             selectInput(inputId = "GOmethod", "Select test for enrichment analysis", 
+                         choices = c('fisher', 'kolmogorov-smirnov', 't',
+                                     'globaltest', 'sum')),
 
-             selectInput(inputId = "GOmethod", "Select method for enrichment analysis", 
-                         choices = c('fisher', 'ks', 't', 'globaltest', 'sum')),
+             selectInput(inputId = "GOtests", "Select algorithm", 
+                         choices = c('classic', 'elim', 'weight',
+                                     'weight01', 'lea', 'parentchild')),
+             
+
              
              numericInput(inputId = "GOpvalue", "Specify FDR", 0.05)
              ),
@@ -31,6 +38,8 @@ tabPanel("GO enrichment",
                  downloadButton('GOdownload', 'Download GO annotations'),
                  tabsetPanel(
                      tabPanel("Table", dataTableOutput('GOtable')), 
-                     tabPanel("Plot1"), 
+                     tabPanel("Enrichment results", dataTableOutput('GOresults')),
+                     tabPanel("Grouped genes"),
+                     tabPanel("Plot1"),
                      tabPanel("Plot2"))
              )))

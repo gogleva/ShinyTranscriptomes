@@ -18,7 +18,8 @@ observeEvent(input$drawHeatmap,{
                 # Colv=NA, dendrogram='row', trace = 'none' ,labRow=NA
                 # )
     heatmaply(exprData, Colv=FALSE, Rowv= exprDen$den, 
-              k_row=k )
+              k_row=k ) %>%
+      layout(dragmode="select")
   })
   print("heatmap done")
 })

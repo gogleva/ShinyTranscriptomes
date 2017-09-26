@@ -19,9 +19,13 @@ tabPanel("GO enrichment",
                          choices = c('biological process',
                                      'molecular function',
                                      'cellular localisation')),
-             
+
              selectInput(inputId = "GOmethod", "Select method for enrichment analysis", 
-                         choices = c('method1', 'method2', 'method3'))),
+                         choices = c('fisher', 'ks', 't', 'globaltest', 'sum')),
+             
+             numericInput(inputId = "GOpvalue", "Specify FDR", 0.05)
+             ),
+             
 
                mainPanel(
                  downloadButton('GOdownload', 'Download GO annotations'),

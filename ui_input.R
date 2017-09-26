@@ -25,7 +25,7 @@ tabPanel("Input data",
            ),
            
            # Show a plot of the generated distribution
-         mainPanel(dataTableOutput('contents')),
+         mainPanel(dataTableOutput('countdataDT')),
          position="left",fluid=FALSE
          ))
 

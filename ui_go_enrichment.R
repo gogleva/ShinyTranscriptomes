@@ -14,16 +14,17 @@ tabPanel("GO enrichment",
                           style="color: #fff; background-color: #337ab7; border-color: #2e6da4"),
              hr(),
              
-             selectInput(inputId = "GOterm",
-                         "Select GOterm",
+             selectInput(inputId = "subOntology",
+                         "Select subontology",
                          choices = c('biological process',
                                      'molecular function',
                                      'cellular localisation')),
              
-             selectInput(inputId = "GOmethod", "Select method", 
+             selectInput(inputId = "GOmethod", "Select method for enrichment analysis", 
                          choices = c('method1', 'method2', 'method3'))),
 
                mainPanel(
+                 downloadButton('GOdownload', 'Download GO annotations'),
                  tabsetPanel(
                      tabPanel("Table", dataTableOutput('GOtable')), 
                      tabPanel("Plot1"), 

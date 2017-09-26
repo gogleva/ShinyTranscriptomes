@@ -1,13 +1,20 @@
 
 
 
-observeEvent(inputDataReactive(),{
-  output$dummyHistogram <-  renderPlot({
-    tmp <- inputDataReactive()
-    if(!is.null(tmp)){
-      tmp <- tmp$data
-      heatmap.2(as.matrix(tmp[,-1]))
-      }
+
+observeEvent(input$drawHeatmap,{
+  exprData <- inputDataReactive()
+  if(!is.null(exprData)){
+    exprData <- exprData$data
+  }
+  
+  exprData <- transformData(exprData, transMethod=input$dataTransform)
+  print(input$dataTransform)
+  exprDen <- clustData(exprData,distMethod=input$corMethod)
+  output$heatmap <-  renderPlot({
+      heatmap.2(as.matrix(exprData[,-1]),
+                Rowv = exprDen, 
+                Colv=NA, dendrogram='row', trace = 'none' ,labRow=NA )
   })
 })
 

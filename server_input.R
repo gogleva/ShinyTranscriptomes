@@ -16,7 +16,7 @@ inputDataReactive <- reactive({
   # browser()
   if(input$input_type=="example_data") {
     # upload example data
-    expressionData <- read.csv("data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpressed.csv")
+    expressionData <- read.csv("data/TPM-17c-27c-average_misexpressed.csv")
     print("uploaded example data")
     return(list('data'=expressionData))
   }else { # if uploading data

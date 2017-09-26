@@ -10,13 +10,15 @@ observeEvent(input$drawHeatmap,{
   
   exprData <- transformData(exprData, transMethod=input$dataTransform)
   print(input$dataTransform)
-  exprDen <- clustData(exprData,distMethod=input$corMethod)
+  exprDen <- clustData(exprData,distMethod=input$corMethod, k=input$treeGroups)
+  k=input$treeGroups
   output$heatmap <-  renderPlotly({
       # heatmaply(as.matrix(exprData[,-1]),
                 # Rowv = exprDen, 
                 # Colv=NA, dendrogram='row', trace = 'none' ,labRow=NA
                 # )
-    heatmaply(exprData[,-1], Colv=FALSE, Rowv= exprDen)
+    heatmaply(exprData, Colv=FALSE, Rowv= exprDen$den, 
+              k_row=k )
   })
   print("heatmap done")
 })

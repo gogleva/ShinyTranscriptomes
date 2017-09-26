@@ -10,6 +10,7 @@
 library(shiny)
 library(gplots)
 library(heatmaply)
+library(RColorBrewer)
 
 # Define UI for application that draws a histogram
 shinyUI(tagList(

@@ -25,7 +25,7 @@ tabPanel("GO enrichment",
 
                mainPanel(
                  tabsetPanel(
-                     tabPanel("Table"), 
+                     tabPanel("Table", textOutput('GOtable')), 
                      tabPanel("Plot1"), 
                      tabPanel("Plot2"))
              )))

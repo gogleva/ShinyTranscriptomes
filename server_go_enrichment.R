@@ -1,5 +1,6 @@
 #server function for GO-enrichment tab
 
+
 output$GOtable <- renderDataTable({ 
  #   print(input$subOntology)
     parsed_GOgenes <- unlist(strsplit(input$GOgenes, '\n'))
@@ -11,6 +12,14 @@ output$GOtable <- renderDataTable({
     
     flatGO <- sapply(GOterm,function(x) paste(unlist(x),collapse="\n"))
     list2 <- sapply(flatGO, strsplit, '\n')
+    
+    # helper function to filter GO terms based on ontology:
+    
+    function(GO_list, sub){
+        all_ont <- lapply(GO_list, Ontology)
+        show_terms <- names(unlist(all_ont[which(all_ont == sub)]))
+        return(show_terms)
+    }
     
     # show GO terms based on the selected subontology:
 

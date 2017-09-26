@@ -1,8 +1,12 @@
 #server function for GO-enrichment tab
 
+# observer for the input field and submit button
+
+observeEvent(input$GOsubmitButton, {
 
 output$GOtable <- renderDataTable({ 
  #   print(input$subOntology)
+    #values$GOgen
     parsed_GOgenes <- unlist(strsplit(input$GOgenes, '\n'))
     GOterm = (mapIds(org.At.tair.db,
                      keys = parsed_GOgenes,
@@ -60,6 +64,8 @@ output$GOdownload <- downloadHandler(
     }
 )
 
+}
+)
 
 
 

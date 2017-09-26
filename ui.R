@@ -8,6 +8,8 @@
 #
 
 library(shiny)
+library("AnnotationDbi")
+library("org.At.tair.db")
 
 # Define UI for application that draws a histogram
 shinyUI(tagList(

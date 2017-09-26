@@ -7,6 +7,11 @@ tabPanel("GO enrichment",
              c('Example data' = "example_data",
                'Upload data' = "upload_data")),
              
+             textAreaInput(inputId = "genes",
+                       label = "Input gene list",
+                       placeholder = 'Paste list of gene ids',
+                       height = '200px'),
+             
              selectInput("GOterm", "Select GOterm",
                          choices = c('biological process',
                                      'molecular function',

@@ -23,14 +23,6 @@ output$GOtable <- renderDataTable({
     flatGO <- sapply(GOterm,function(x) paste(unlist(x),collapse="\n"))
     list2 <- sapply(flatGO, strsplit, '\n')
     
-    # # helper function to filter GO terms based on ontology:
-    # 
-    # function(GO_list, sub){
-    #     all_ont <- lapply(GO_list, Ontology)
-    #     show_terms <- names(unlist(all_ont[which(all_ont == sub)]))
-    #     return(show_terms)
-    # }
-    
     # show GO terms based on the selected subontology:
 
     if (input$subOntology == 'biological process') {
@@ -74,9 +66,19 @@ output$GOresults <- renderDataTable({
     # create GOdata object
     
     geneID2GO <- readMappings("data/id2go")
+    
+    if (input$subOntology == 'biological process') {
+        transformed_ontology <- 'BP'
+    } else if ((input$subOntology == 'molecular function')) {
+        transformed_ontology <- 'MF'
+    } else if ((input$subOntology == 'cellular localisation')) {
+        transformed_ontology <- 'CC'
+    }
+    
+    #create object for topGO analysis
     myGOdata <- new("topGOdata",
                     description="My project",
-                    ontology="BP",
+                    ontology= transformed_ontology,
                     allGenes=geneList,
                     annot = annFUN.gene2GO,
                     gene2GO = geneID2GO)

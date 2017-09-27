@@ -1,4 +1,0 @@
-
-tabPanel("Getting Started")
-
-

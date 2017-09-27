@@ -36,6 +36,9 @@ tabPanel(
                    value = 100, min = 10, max = Inf)),
     
     # Plot the heatmap in the main panel
-    mainPanel(plotlyOutput("heatmap")))
-)
+    mainPanel(fluidPage(
+      fixedRow(plotlyOutput("heatmap", height="500px")),
+      fixedRow(verbatimTextOutput("heatmap_select"))
+              ))
+))
 

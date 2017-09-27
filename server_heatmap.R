@@ -28,4 +28,9 @@ observeEvent(input$draw_heatmap, {
               k_row = k) %>%
       layout(dragmode = "select")
   })
+  output$heatmap_select <- renderPrint({
+    user_selection <- event_data("plotly_selected")
+    if (is.null(user_selection)) "Nothing selected" else user_selection
+  })
 })
+

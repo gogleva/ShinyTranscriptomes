@@ -33,12 +33,14 @@ tabPanel(
       
       # Option for number of genes to plot
       numericInput("n_top", "Number of top variable genes to cluster",
-                   value = 100, min = 10, max = Inf)),
+                   value = 10, min = 10, max = Inf)),
     
     # Plot the heatmap in the main panel
     mainPanel(fluidPage(
-      fixedRow(plotlyOutput("heatmap", height="500px")),
-      fixedRow(verbatimTextOutput("heatmap_select"))
+      fixedRow(
+        column(6,plotlyOutput("heatmap", height="420px")),
+        column(3,plotlyOutput("dendrogram", height="420px"))),
+      fixedRow(plotOutput("heatmap_click", height="250px"))
               ))
 ))
 

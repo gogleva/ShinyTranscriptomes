@@ -65,13 +65,24 @@ clustData <- function(x,
   
   # Cluster data using hclust with default options
   # and convert to dendrogram
-  x_den <- hclust(x_dist, method = "complete") %>% 
-    as.dendrogram()
+  x_clust <- hclust(x_dist, method = "complete") 
+  
+  # Dendrogram data
+  x_dend <- dendro_data(x_clust, type="rectangle")
+  
+  x_dend <- x_dend$labels %>%
+    rename(ylabel = y) %>%
+    full_join(x_dend$segments, by="x")
+  
+  # Heatmap data
+  x_heatmap <- x %>%
+    mutate(id=row.names(.)) %>%
+    gather("sample","value",-id)
   
   # # Cut the tree into defined number of groups
   # x_cut <- cutree(x_clust, k)
   # k_colour = brewer.pal(12, 'Set3')[x_cut]
   # 
 
-  return(x_den)
+  return(list(dendro_data=x_dend, heatmap_data=x_heatmap))
 }

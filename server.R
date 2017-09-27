@@ -2,11 +2,7 @@
 # This is the server logic  of the SLCU shiny transcriptomes APP
 #
 
-# Load necessary libraries
-library(shiny)
-library(gplots)
-library(heatmaply)
-library(RColorBrewer)
+
 
 # Define server logic
 # each tab's server code is sourced from the respective file

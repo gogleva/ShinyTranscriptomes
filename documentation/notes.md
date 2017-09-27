@@ -67,6 +67,14 @@ Coupled evens in plots: https://plot.ly/r/shiny-coupled-events/
     + **save table outputs (clustering results + expression + annotation)**
 
 
+* **Future work**:
+
+   + open an issue and create a branch: issue+N
+   + work on one issue at a time
+   
+
+
+
 
 
 

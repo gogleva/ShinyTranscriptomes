@@ -17,4 +17,5 @@ shinyServer(function(input, output) {
   
   source("server_input.R", local = TRUE)
   source("server_heatmap.R", local = TRUE)
+ source("server_go_enrichment.R", local = TRUE)    
 })

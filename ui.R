@@ -4,12 +4,11 @@
 
 # Load necessary libraries
 library(shiny)
-library(gplots)
-library(heatmaply)
-library(RColorBrewer)
 library(AnnotationDbi)
 library(org.At.tair.db)
 library(topGO)
+library(dplyr)
+library(tidyr)
 
 # Define main UI, which contains several tabs (navbarPage)
 ## each tab's definition is sourced from separate files

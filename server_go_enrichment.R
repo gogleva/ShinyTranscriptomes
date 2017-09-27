@@ -2,7 +2,7 @@
 
 # helper function to filter GO terms based on ontology:
 
-function(GO_list, sub){
+filterOntology <- function(GO_list, sub){
     all_ont <- lapply(GO_list, Ontology)
     show_terms <- names(unlist(all_ont[which(all_ont == sub)]))
     return(show_terms)
@@ -78,8 +78,8 @@ output$GOresults <- renderDataTable({
     #create object for topGO analysis
     myGOdata <- new("topGOdata",
                     description="My project",
-                    ontology= transformed_ontology,
-                    allGenes=geneList,
+                    ontology = transformed_ontology,
+                    allGenes = geneList,
                     annot = annFUN.gene2GO,
                     gene2GO = geneID2GO)
     #

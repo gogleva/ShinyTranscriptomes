@@ -1,4 +1,4 @@
 # shiny_transcriptomes
 
 
-[notes](notes.md)
+[notes](docs/notes.md)

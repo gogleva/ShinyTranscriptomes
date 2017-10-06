@@ -5,10 +5,10 @@
 # Load necessary libraries
 library(shiny)
 library(plotly)
-library(ggdendro)
-library(AnnotationDbi)
-library(org.At.tair.db)
-library(topGO)
+#library(ggdendro)
+#library(AnnotationDbi)
+#library(org.At.tair.db)
+#library(topGO)
 library(dplyr)
 library(tidyr)
 

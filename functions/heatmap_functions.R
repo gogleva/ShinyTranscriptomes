@@ -68,7 +68,8 @@ clustData <- function(x,
   x_clust <- hclust(x_dist, method = "complete") 
   
   # Dendrogram data
-  x_dend <- dendro_data(x_clust, type="rectangle")
+  x_dend <- ggdendro::dendro_data(x_clust, type="rectangle")
+  labels <- x_dend$labels$label
   
   x_dend <- x_dend$labels %>%
     rename(ylabel = y) %>%
@@ -76,7 +77,7 @@ clustData <- function(x,
   
   # Heatmap data
   x_heatmap <- x %>%
-    mutate(id=row.names(.)) %>%
+    mutate(id = factor(row.names(.), levels = labels)) %>%
     gather("sample","value",-id)
   
   # # Cut the tree into defined number of groups

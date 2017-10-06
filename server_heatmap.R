@@ -24,7 +24,7 @@ observeEvent(input$draw_heatmap, {
                  aes(sample, id, fill=value))+
         geom_tile() +
         theme(axis.text.x=element_text(angle=90, hjust=1), 
-              axis.text.y=element_blank(),
+              #axis.text.y=element_blank(),
               axis.title = element_blank())
       ggplotly(p) %>%
         layout(dragmode="select")
@@ -36,7 +36,7 @@ observeEvent(input$draw_heatmap, {
       geom_text (aes(x=x, y=ylabel-0.1, label=label), hjust=1) +
       geom_point(aes(x=x, y=ylabel-0.6),size=2) +
       coord_flip() +
-      theme_dendro()
+      ggdendro::theme_dendro()
     ggplotly(p2)%>%
       layout(dragmode="select")
   })

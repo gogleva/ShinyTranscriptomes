@@ -37,9 +37,9 @@ tabPanel(
     
     # Plot the heatmap in the main panel
     mainPanel(fluidPage(
-      fixedRow(
-        column(6,plotlyOutput("heatmap", height="420px")),
-        column(3,plotlyOutput("dendrogram", height="420px"))),
+      fluidRow(
+        column(6,plotlyOutput("heatmap", height="500px")),
+        column(3,plotlyOutput("dendrogram", height="500px"))),
       fixedRow(plotOutput("heatmap_click", height="250px"))
               ))
 ))
